@@ -1,0 +1,29 @@
+{
+  "name": "expre",
+  "version": "0.2.1",
+  "description": "Another web application framework",
+  "main": "src/index.js",
+  "devDependencies": {
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jojoin/expre.git"
+  },
+  "keywords": [
+    "web",
+    "application",
+    "framework"
+  ],
+  "author": "yangjie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jojoin/expre/issues"
+  },
+  "homepage": "https://github.com/jojoin/expre#readme"
+}
