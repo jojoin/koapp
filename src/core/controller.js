@@ -11,9 +11,6 @@ module.exports = app => {
         constructor(){
             let that = this;
             this.ctx = {
-                set body( stuff ){
-                    that.__render(stuff); // 输出
-                }
             };
         }
 
@@ -31,21 +28,20 @@ module.exports = app => {
 
         }
 
-        // 结束请求，输出检查内容
-        async __render(text)
-        {
+        // 结束请求，返回内容
+        set body( stuff ){
             let res = this.ctx.res;
             // 输出
-            if( text === null || text === undefined ){
+            if( !res || stuff === null || stuff === undefined ){
                 return;
             }
-            if( typeof text == 'object' ){
-                text = JSON.stringify(text); // json 字符串
+            if( typeof stuff == 'object' ){
+                stuff = JSON.stringify(stuff); // json 字符串
             }
             res.writeHead(200);
-            res.end( text );
-
+            res.end( stuff );
         }
+
 
     }
 

@@ -23,8 +23,8 @@ return new Promise( async function(resolve, reject){
     let app_context = await lib_loader.base();
 
     // 多核
-    let is_cluster = lib_cluster.startup( app_context );
-    if( ! is_cluster ){
+    let is_continue = lib_cluster.startup( app_context );
+    if( is_continue ){
 
         // 工作线程
         // 启动其它服务
@@ -32,6 +32,7 @@ return new Promise( async function(resolve, reject){
         // 启动http服务
         let hp = await lib_http.run( app_context );
 
+        app_context.log(123);
 
     }
 

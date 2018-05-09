@@ -12,7 +12,7 @@ module.exports = appInfo => {
             let psx = path.split('.');
             for(let i in psx){
                 let key = psx[i];
-                if( confData[key] ){
+                if( confData[key] !== undefined ){
                     if( i == psx.length-1 ){
                         return confData[key]; // 取得
                     }

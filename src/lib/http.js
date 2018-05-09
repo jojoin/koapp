@@ -30,13 +30,13 @@ return new Promise( async function(resolve, reject){
     // 监听
     let worker_num = app.confRead( 'port.worker.num' ) || numCPUs;
 
-    if (cluster.isMaster) {
+    //if (cluster.isMaster) {
 
 
-        // app.log(`cluster listen port ${http_port}`);
+        app.log(`process ${process.pid} listen port ${http_port}`);
 
 
-    } else {
+    //} else {
 
         // 工作进程可以共享任何 TCP 连接。
         // 在本例子中，共享的是一个 HTTP 服务器。
@@ -45,7 +45,7 @@ return new Promise( async function(resolve, reject){
             lib_ctrl( app ) // 路由分发
 
         ).listen( http_port );
-    }
+    //}
 
 
 
