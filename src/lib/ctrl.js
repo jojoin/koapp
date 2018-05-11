@@ -79,8 +79,7 @@ module.exports = app => {
             // 创建实例化控制器
             urlobj.param = url_path_param; // url参数
             let newReqObject = new app.Controller();
-            newReqObject.__setReqRes(req, res, urlobj);
-            newReqObject.initialize();
+            newReqObject.__setReqRes(req, res, urlobj); // 初始环境设置
 
             // 执行
             ctrlFunc.call( newReqObject );

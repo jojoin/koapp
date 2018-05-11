@@ -11,6 +11,12 @@ module.exports = app => {
         constructor(){
             let that = this;
             this.ctx = {
+
+                // 结束请求，返回内容
+                set body( str ){
+                    that.__render (str);
+                }
+
             };
         }
 
@@ -22,14 +28,8 @@ module.exports = app => {
             this.ctx.url = urlobj;
         }
 
-        // 初始化
-        async initialize()
-        {
-
-        }
-
-        // 结束请求，返回内容
-        set body( stuff ){
+        // 输出
+        __render (stuff) {
             let res = this.ctx.res;
             // 输出
             if( !res || stuff === null || stuff === undefined ){
@@ -40,8 +40,8 @@ module.exports = app => {
             }
             res.writeHead(200);
             res.end( stuff );
-        }
 
+        }
 
     }
 
