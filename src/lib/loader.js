@@ -62,6 +62,8 @@ return new Promise( async function(resolve, reject){
 
     // 控制器页面等
     await loadHelp       ( 'help' );         // 帮助
+    await loadCommon     ( 'common' );       // 通用
+    await loadModel      ( 'model' );        // model 模块
     await loadView       ( 'view' );         // web页面
     await loadControl    ( 'control' );      // 控制器
     await loadRoute      ( 'route' );        // 路由
@@ -155,6 +157,31 @@ return new Promise( async function(resolve, reject){
 
 
 // 加载初始化
+async function loadModel( dir )
+{
+return new Promise( async function(resolve, reject){
+    // 扫描 js 文件，绝对路径
+    let files = await scanFile ( path.join(dir_app, './'+dir), 'js', true );
+
+    app.Context[dir] = app.Context[dir] || {};
+
+    // 加载执行
+    files.forEach(function( f ){
+        let mod = require(f)
+          , name = path.basename(f, '.js')
+          , modelObject = mod(app.Context)
+        // 执行
+        app.Context[dir][name] = new modelObject();
+    });
+    
+    // ok
+    resolve();
+});
+}
+
+
+
+// 加载初始化
 async function loadInit ( dir )
 {
 return new Promise( async function(resolve, reject){
@@ -166,6 +193,30 @@ return new Promise( async function(resolve, reject){
         let mod = require(f);
         // 执行
         mod(app.Context);
+    });
+    
+    // ok
+    resolve();
+});
+}
+
+
+
+// 加载初始化
+async function loadCommon( dir )
+{
+return new Promise( async function(resolve, reject){
+    // 扫描 js 文件，绝对路径
+    let files = await scanFile ( path.join(dir_app, './'+dir), 'js', true );
+
+    app.Context[dir] = app.Context[dir] || {};
+
+    // 加载执行
+    files.forEach(function( f ){
+        let mod = require(f)
+          , name = path.basename(f, '.js');
+        // 执行
+        app.Context[dir][name] = mod(app.Context);
     });
     
     // ok
@@ -189,7 +240,7 @@ return new Promise( async function(resolve, reject){
         let mod = require(f)
           , name = path.basename(f, '.js');
         // 执行
-        app.Context[dir][name] = mod(app.Context);
+        app.Context[dir][name] = mod;
     });
     
     // ok

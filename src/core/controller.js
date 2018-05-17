@@ -35,10 +35,12 @@ module.exports = app => {
             if( !res || stuff === null || stuff === undefined ){
                 return;
             }
+            let contype = 'text/html';
             if( typeof stuff == 'object' ){
                 stuff = JSON.stringify(stuff); // json 字符串
+                contype = 'application/json';
             }
-            res.writeHead(200);
+            res.writeHead(200, {'Content-Type': contype+'; charset=utf-8'})
             res.end( stuff );
 
         }
