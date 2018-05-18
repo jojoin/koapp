@@ -46,6 +46,8 @@ module.exports = app => {
                   , keys = li[1]
                   ;
                 let args = rex.exec(pathname); //正则匹配
+                urlobj.rexs = args;
+                // console.log(args);
                 if(args){  // 匹配完成
                     // 第一个值为匹配到的整个url，后面才是匹配的的值
                     for(let n=0; n<keys.length; n++){

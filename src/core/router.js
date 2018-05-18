@@ -30,7 +30,7 @@ module.exports = app => {
             this.pathmap[method] = this.pathmap[method] || {};
             this.pathary[method] = this.pathary[method] || [];
             let routedata = [method, urlpath, ...middleware_and_control];
-            if( urlpath.indexOf('/:') == -1 ){
+            if( typeof urlpath == 'string' && urlpath.indexOf('/:') == -1 ){
                 this.pathmap[method][urlpath] = routedata;
             }else{
                 let keys = [];

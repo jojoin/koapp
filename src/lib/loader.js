@@ -63,6 +63,7 @@ return new Promise( async function(resolve, reject){
     // 控制器页面等
     await loadHelp       ( 'help' );         // 帮助
     await loadCommon     ( 'common' );       // 通用
+    await loadLibrary    ( 'library' );      // library 代码库
     await loadModel      ( 'model' );        // model 模块
     await loadView       ( 'view' );         // web页面
     await loadControl    ( 'control' );      // 控制器
@@ -174,6 +175,43 @@ return new Promise( async function(resolve, reject){
         app.Context[dir][name] = new modelObject();
     });
     
+    // ok
+    resolve();
+});
+}
+
+
+
+// 加载初始化
+async function loadLibrary( dir )
+{
+return new Promise( async function(resolve, reject){
+
+    app.Context[dir] = app.Context[dir] || {};
+
+    // 扫描 js 文件，绝对路径
+    let files = await scanFile ( path.join(dir_app, './'+dir), 'js', true );
+    // 加载执行
+    files.forEach(function( f ){
+        let mod = require(f)
+          , name = path.basename(f, '.js')
+        // 执行
+        app.Context[dir][name] = mod;
+    });
+
+    // 扫描路径 加载 index.js
+    let dirs = await scanDir ( path.join(dir_app, './'+dir), true );
+    // 加载执行
+    dirs.forEach(function( f ){
+        // console.log(f+'/index.js');
+        try{ // 尝试加载 index.js
+            let name = path.basename(f)
+            let mod = require(f+'/index.js')
+            // 执行
+            app.Context[dir][name] = mod;
+        }catch(e){}
+    });
+
     // ok
     resolve();
 });
@@ -382,7 +420,7 @@ return new Promise( async function(resolve, reject){
 
 
 // 扫描路径
-async function scanDir (dir)
+async function scanDir (dir, ret_absolute)
 {
 return new Promise( async function(resolve, reject){
     // console.log(dir);
@@ -393,6 +431,10 @@ return new Promise( async function(resolve, reject){
         }
         files.forEach(function(elm){
             if( elm.indexOf('.') == -1 ){ // 没有点号 目录
+                // 返回全路径
+                if( ret_absolute ){
+                    elm = path.join(dir, elm);
+                }
                 dir_arr.push(elm);
             }
         });
