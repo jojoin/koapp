@@ -1,10 +1,8 @@
 {
-  "name": "expre",
-  "version": "0.2.1",
+  "name": "koapp",
+  "version": "1.0.1",
   "description": "Another web application framework",
   "main": "src/index.js",
-  "devDependencies": {
-  },
   "directories": {
     "test": "test"
   },
@@ -13,17 +11,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jojoin/expre.git"
+    "url": "git+https://github.com/jojoin/koapp.git"
   },
   "keywords": [
     "web",
     "application",
-    "framework"
+    "framework",
+    "mvc"
   ],
+  "dependencies": {
+    "koa": "^2.13.1"
+  },
+  "devDependencies": {
+  },
   "author": "yangjie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jojoin/expre/issues"
+    "url": "https://github.com/jojoin/koapp/issues"
   },
-  "homepage": "https://github.com/jojoin/expre#readme"
+  "homepage": "https://github.com/jojoin/koapp#readme"
 }
