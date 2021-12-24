@@ -1,6 +1,6 @@
 {
   "name": "koappx",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Another web application framework",
   "main": "src/index.js",
   "directories": {
@@ -20,10 +20,15 @@
     "mvc"
   ],
   "dependencies": {
-    "koa": "^2.13.1"
+    "extend": "^3.0.2",
+    "koa": "^2.13.1",
+    "koa-router": "^7.4.0",
+    "less": "^4.1.2",
+    "csso": "^5.0.2",
+    "html-minifier": "^4.0.0",
+    "uglify-js": "^3.14.5"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "author": "yangjie",
   "license": "MIT",
   "bugs": {
