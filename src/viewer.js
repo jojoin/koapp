@@ -103,7 +103,7 @@ async function compileOneView(paths, cnf, key, filename){
     if(cnf.debug) {
         // refresh
         let fname = `${paths.app}/viewer/${name}.js`
-        await compileOneView(paths, cnf, fname)
+        view = await compileOneView(paths, cnf, name, fname)
     }
     // data
     let lang = ctx.lang.data
