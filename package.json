@@ -23,6 +23,7 @@
     "extend": "^3.0.2",
     "koa": "^2.13.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "less": "^4.1.2",
     "csso": "^5.0.2",
     "html-minifier": "^4.0.0",

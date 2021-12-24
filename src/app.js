@@ -10,6 +10,7 @@ const paths = require('./boot').paths()
 const language = require('./language')
 const viewer = require('./viewer')
 const router = require('./router')
+const static = require('./static')
 
 
 /**
@@ -19,6 +20,7 @@ async function start(){
     await language.load(paths, config, app)
     await viewer.load(paths, config, app)
     await router.load(paths, config, app)
+    await static.server(paths, config, app)
 } 
 start().then()
 
