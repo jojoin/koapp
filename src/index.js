@@ -4,9 +4,20 @@
 const boot = require('./boot')
 const server = require('./server')
 
+/**
+ * config
+ */
+ exports.config = require('./config').config
 
 /**
- * 
+ * config
+ */
+ exports.util = function (name) {
+    return require(`./util/${name}`)
+ }
+
+/**
+ * run
  */
 exports.run = async function (argument)
 {
