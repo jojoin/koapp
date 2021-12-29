@@ -32,9 +32,9 @@
     }
     // routes
     for(let i in routes){
-        var isPost = false
-        var isView = false
-        var ctrlpath = routes[i]
+        let isPost = false
+        let isView = false
+        let ctrlpath = routes[i]
         if(i.startsWith('POST:')){
             i = i.slice(5) // POST:
             isPost = true
@@ -43,10 +43,10 @@
             ctrlpath = ctrlpath.slice(5) // VIEW:
             isView = true
         }
-        var ctrl
+        let ctrl
         if(isView){
             ctrl = async function(ctx, next){
-                await viewer.render(ctrlpath, paths, cnf, ctx, next) // render page
+                await viewer.render(ctrlpath, paths, cnf, ctx, router, next) // render page
             }
         }else{
             ctrl = require(controllerdir + '/'+ctrlpath + '.js')
