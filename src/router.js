@@ -49,7 +49,10 @@
                 await viewer.render(ctrlpath, paths, cnf, ctx, router, next) // render page
             }
         }else{
-            ctrl = require(controllerdir + '/'+ctrlpath + '.js')
+            ctrlfunc = require(controllerdir + '/'+ctrlpath + '.js')
+            ctrl = async function(ctx, next){
+                await ctrlfunc(cnf, ctx, next)
+            }
         }
         if (isPost){
             router.post(i, ctrl)

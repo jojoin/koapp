@@ -7,6 +7,7 @@
  // modules
 const config = require('./config').config()
 const paths = require('./boot').paths()
+const apires = require('./apires')
 const language = require('./language')
 const viewer = require('./viewer')
 const router = require('./router')
@@ -17,6 +18,7 @@ const static = require('./static')
  * run
  */
 async function start(){
+    await apires.load(app)
     await language.load(paths, config, app)
     await viewer.load(paths, config, app)
     await router.load(paths, config, app)
