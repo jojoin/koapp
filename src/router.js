@@ -31,6 +31,25 @@
         return
     }
     // routes
+    function doOneRoute(name, ctrlpath, isPost, isView) {
+        // console.log(name, ctrlpath, isPost, isView)
+        let ctrl
+        if(isView){
+            ctrl = async function(ctx, next){
+                await viewer.render(ctrlpath, paths, cnf, ctx, router, next) // render page
+            }
+        }else{
+            let ctrlfunc = require(controllerdir + '/'+ctrlpath + '.js')
+            ctrl = async function(ctx, next){
+                await ctrlfunc(cnf, ctx, next)
+            }
+        }
+        if (isPost){
+            router.post(name, ctrl)
+        }else{
+            router.get(name, ctrl)
+        }
+    }
     for(let i in routes){
         let isPost = false
         let isView = false
@@ -43,22 +62,7 @@
             ctrlpath = ctrlpath.slice(5) // VIEW:
             isView = true
         }
-        let ctrl
-        if(isView){
-            ctrl = async function(ctx, next){
-                await viewer.render(ctrlpath, paths, cnf, ctx, router, next) // render page
-            }
-        }else{
-            ctrlfunc = require(controllerdir + '/'+ctrlpath + '.js')
-            ctrl = async function(ctx, next){
-                await ctrlfunc(cnf, ctx, next)
-            }
-        }
-        if (isPost){
-            router.post(i, ctrl)
-        }else{
-            router.get(i, ctrl)
-        }
+        doOneRoute(i, ctrlpath, isPost, isView)
     }
     // use routes
     app.use(router.routes());

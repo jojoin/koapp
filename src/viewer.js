@@ -145,7 +145,6 @@ async function compileOneView(paths, cnf, key, filename){
     }
     ctx.body = body
     //ok
-    // await next()
  }
 
 
