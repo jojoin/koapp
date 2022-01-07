@@ -141,7 +141,7 @@ async function compileOneView(paths, cnf, key, filename){
         body = view.tmplfunc(pagadata)
         // console.log(pagadata, body, view.tmplfunc)
     } catch (e) {
-        body = e.String()
+        body = e.toString()
     }
     ctx.body = body
     //ok
