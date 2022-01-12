@@ -8,6 +8,7 @@ const server = require('./server')
  * config
  */
  exports.config = require('./config').config
+ exports.paths = require('./boot').paths
 
 /**
  * config
