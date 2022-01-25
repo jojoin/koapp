@@ -73,7 +73,14 @@ exports.load = async function(paths, cnf, app) {
                 }   
             }
         }else if(cklang) {
-            realuselang = cklang // read use from cookie
+            if(langdirs[cklang]) {
+                realuselang = cklang // read use from cookie
+            }else{
+                ctx.cookies.set('lang','',{signed:false,maxAge:0}) // delete
+                if(cnf.debug){
+                    console.log(`cannot find language <${cklang}> from url query lang`)
+                }   
+            }
         }
         // require lang
         var langdata = loadLanguage(langdir, realuselang)
