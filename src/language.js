@@ -26,7 +26,6 @@ function loadLanguageItem(langs, dir) {
         , lobj = require(one)
         // console.log('files', i, key, one, lobj)
         langs[key] = lobj
-        return
     }
     return flist.folders
 }

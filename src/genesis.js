@@ -102,7 +102,6 @@ exports.datas = async function(cnf, ctx)
     return {
         // isMobile: types.isMobile(ctx.req),
         // numToThousands: utilnumber.numToThousands,
-        // diamond_types: diamond_types,
         title: "Koappx framework"
     }
 }
@@ -330,6 +329,22 @@ button {
     "app/component/index/index.html": `<div>koappx index</div>`,
     "app/component/index/index.js": `/* index.js */`,
     "app/component/index/index.less": `/* index.less */`,
+
+    // config
+    "config.js": `module.exports = {
+    debug: false,
+
+    http_port: 8009,
+    watch_restart_timeout: 0,
+    
+}`,
+    "config.use.js": `module.exports = {
+debug: true,
+
+http_port: 8009,
+watch_restart_timeout: 0,
+
+}`,
 
 
 }

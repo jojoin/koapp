@@ -132,6 +132,7 @@ async function compileOneView(paths, cnf, key, filename){
         },
         lang: lang, // lang use & data
     }
+    // console.log(lang)
     var data = await view.datas(cnf, ctx, router)
     extend(true, pagadata, data)
     // tmpl
