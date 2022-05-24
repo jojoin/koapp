@@ -3,6 +3,7 @@
  */
 const boot = require('./boot')
 const server = require('./server')
+const genesis = require('./genesis')
 
 /**
  * config
@@ -16,6 +17,15 @@ const server = require('./server')
  exports.util = function (name) {
     return require(`./util/${name}`)
  }
+
+
+/**
+ * genesis_init
+ */
+ exports.genesis_init = function() {
+    genesis.create()
+ }
+
 
 /**
  * run
