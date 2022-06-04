@@ -339,10 +339,10 @@ button {
     
 }`,
     "config.use.js": `module.exports = {
-debug: true,
+    debug: true,
 
-http_port: 8009,
-watch_restart_timeout: 0,
+    http_port: 8009,
+    watch_restart_timeout: 0,
 
 }`,
 
