@@ -22,7 +22,7 @@ const genesis = require('./genesis')
 * model
 */
  exports.model = function (name) {
-   return require(`${boot.paths().app}/${name}`)
+   return require(`${boot.paths().app}/model/${name}`)
 }
 
 
