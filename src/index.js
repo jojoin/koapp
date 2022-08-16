@@ -1,35 +1,42 @@
 /**
- * web app engine: koapp
- */
+* web app engine: koapp
+*/
 const boot = require('./boot')
 const server = require('./server')
 const genesis = require('./genesis')
 
 /**
- * config
- */
+* config
+*/
  exports.config = require('./config').config
- exports.paths = require('./boot').paths
+ exports.paths = boot.paths
 
 /**
- * config
- */
+* util
+*/
  exports.util = function (name) {
-    return require(`./util/${name}`)
- }
+   return require(`./util/${name}`)
+}
+
+/**
+* model
+*/
+ exports.model = function (name) {
+   return require(`${boot.paths().app}/${name}`)
+}
 
 
 /**
- * genesis_init
- */
+* genesis_init
+*/
  exports.genesis_init = function() {
     genesis.create()
  }
 
 
 /**
- * run
- */
+* run
+*/
 exports.run = async function (argument)
 {
     
