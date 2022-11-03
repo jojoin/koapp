@@ -35,19 +35,23 @@ function loadLanguageItem(langs, dir) {
  * load language
  */
 exports.load = async function(paths, cnf, app) {
-    var langdir = paths.language
+    let langdir = paths.language
     if( ! fs.statSync(langdir, {throwIfNoEntry: false})) {
         console.log(`[Note] cannot find language dir '${langdir}'.`)
         return
     }
     // start
-    var types =  utilfs.scanSync(langdir).folders
+    let types =  utilfs.scanSync(langdir).folders
     , realuselang = null
     , firstlang = null
+    , hasEnUS = null
     , langdirs = {}
     // load
     for(var i in types) {
         var ty = path.basename(types[i])
+        if('en_US' == ty) {
+            hasEnUS = 'en_US'
+        }
         if(firstlang == null){
             firstlang = ty
         }
@@ -57,14 +61,14 @@ exports.load = async function(paths, cnf, app) {
         langdirs[ty] = types[i]
     }
     // use 
-    realuselang = realuselang || firstlang
+    realuselang = realuselang || hasEnUS || firstlang
     // select
     app.use(async (ctx, next) => {
-        var q = ctx.request.query
+        let q = ctx.request.query
         , cklang = ctx.cookies.get("lang")
         if( q.lang ) {
             if(langdirs[q.lang]) {
-                ctx.cookies.set("lang", q.lang, {path:"/", maxAge:1000*60*60*24*365, httpOnly: true})
+                ctx.cookies.set("lang", q.lang, {path:"/", maxAge:1000*60*60*24,/**365, httpOnly: true*/})
                 realuselang = q.lang // change use
             }else{
                 if(cnf.debug){
@@ -82,7 +86,8 @@ exports.load = async function(paths, cnf, app) {
             }
         }
         // require lang
-        var langdata = loadLanguage(langdir, realuselang)
+        // console.log(realuselang)
+        let langdata = loadLanguage(langdir, realuselang)
         // data
         ctx.lang = {
             use: realuselang,
