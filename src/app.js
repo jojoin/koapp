@@ -1,8 +1,10 @@
 /**
  * app
- */
- const Koa = require('koa');
- const app = new Koa();
+*/
+const Koa = require('koa');
+const app = new Koa();
+
+const util = require('./util')
 
  // modules
 const config = require('./config').config()

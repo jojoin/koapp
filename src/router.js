@@ -62,6 +62,10 @@
             ctrlpath = ctrlpath.slice(5) // VIEW:
             isView = true
         }
+        if(false==i.startsWith('/')) {
+            console.error("------------\n[Routes] Error: route key must start with '/' symbol: [" + i+ "]\n------------\n")
+            throw true
+        }
         doOneRoute(i, ctrlpath, isPost, isView)
     }
     // use routes
