@@ -64,12 +64,14 @@ exports.load = async function(paths, cnf, app) {
     realuselang = realuselang || hasEnUS || firstlang
     // select
     app.use(async (ctx, next) => {
+
         let q = ctx.request.query
         , cklang = ctx.cookies.get("lang")
+        , requselang = realuselang+""
         if( q.lang ) {
             if(langdirs[q.lang]) {
                 ctx.cookies.set("lang", q.lang, {path:"/", maxAge:1000*60*60*24,/**365, httpOnly: true*/})
-                realuselang = q.lang // change use
+                requselang = q.lang // change use
             }else{
                 if(cnf.debug){
                     console.log(`cannot find language <${q.lang}> from url query lang`)
@@ -77,7 +79,7 @@ exports.load = async function(paths, cnf, app) {
             }
         }else if(cklang) {
             if(langdirs[cklang]) {
-                realuselang = cklang // read use from cookie
+                requselang = cklang // read use from cookie
             }else{
                 ctx.cookies.set('lang','',{signed:false,maxAge:0}) // delete
                 if(cnf.debug){
@@ -86,8 +88,8 @@ exports.load = async function(paths, cnf, app) {
             }
         }
         // require lang
-        // console.log(realuselang)
-        let langdata = loadLanguage(langdir, realuselang)
+        // console.log(requselang)
+        let langdata = loadLanguage(langdir, requselang)
         // data
         ctx.lang = {
             use: realuselang,

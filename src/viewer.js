@@ -34,7 +34,8 @@ const allViews = {}
 
 async function readComponentFiles(componentdir, names, ext){
     let files = names.map(function(x){
-        var filename = x.indexOf('/')>0 ? 'index' : x
+        let nks = x.split('/')
+        var filename = nks.length>0 ? nks[nks.length-1] : x
         return `${componentdir}/${x}/${filename}.${ext}`
     })
     // console.log(files)
