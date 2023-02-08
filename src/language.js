@@ -92,7 +92,7 @@ exports.load = async function(paths, cnf, app) {
         let langdata = loadLanguage(langdir, requselang)
         // data
         ctx.lang = {
-            use: realuselang,
+            use: requselang,
             data: langdata,
         } 
         // console.log(ctx.lang)

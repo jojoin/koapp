@@ -1,6 +1,6 @@
 {
   "name": "koappx",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Another web application framework",
   "main": "src/index.js",
   "directories": {
