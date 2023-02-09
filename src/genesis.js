@@ -252,6 +252,17 @@ function getStyle(obj, attr)
     } 
 } 
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+}
+
 function setCookie (cname, cvalue, path, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
