@@ -35,7 +35,7 @@ const allViews = {}
 async function readComponentFiles(componentdir, names, ext){
     let files = names.map(function(x){
         let nks = x.split('/')
-        var filename = nks.length>0 ? nks[nks.length-1] : x
+        let filename = nks.length>0 ? nks[nks.length-1] : x
         return `${componentdir}/${x}/${filename}.${ext}`
     })
     // console.log(files)
@@ -81,7 +81,7 @@ async function compileOneView(paths, cnf, key, filename){
     }
     // compile
     fs.mkdirSync(paths.static+'/jscss', {recursive: true})
-    var viewcon =  await compileJsCssTpl(cnf, paths.static, paths.app+'/component', key, view)
+    let viewcon =  await compileJsCssTpl(cnf, paths.static, paths.app+'/component', key, view)
     // console.log(viewcon)
     // load
     return {
@@ -94,14 +94,14 @@ async function compileOneView(paths, cnf, key, filename){
  * load all page 
  */
  exports.load = async function(paths, cnf, app) {
-    var viewerdir = paths.app + '/viewer'
+    let viewerdir = paths.app + '/viewer'
     if( ! fs.statSync(viewerdir, {throwIfNoEntry: false})) {
         console.log(`[Note] cannot find viewer dir '${viewerdir}'.`)
         return
     }
     // scan
-    var files = utilfs.scanSync(viewerdir).files
-    for(var i in files){
+    let files = utilfs.scanSync(viewerdir).files
+    for(let i in files){
         let one = files[i]
         let key = path.basename(one).replace('.js', '')
         allViews[key] = await compileOneView(paths, cnf, key, one)
@@ -112,7 +112,7 @@ async function compileOneView(paths, cnf, key, filename){
  * render one page
  */
  exports.render = async function(name, paths, cnf, ctx, router, next) {
-     var view = allViews[name]
+    let view = allViews[name]
     if( ! view){
         throw `[Error] cannot find viewer <${name}> in 'app/viewer/*' path settings.`
     }
@@ -125,7 +125,7 @@ async function compileOneView(paths, cnf, key, filename){
     // data
     let lang = ctx.lang.data
     lang.useset = ctx.lang.use
-    var pagadata = {
+    let pagadata = {
         title: "koappx page",
         page: {
             name: name,
@@ -134,8 +134,8 @@ async function compileOneView(paths, cnf, key, filename){
         lang: lang, // lang use & data
     }
     // console.log(lang)
-    var data = await view.datas(cnf, ctx, router)
-    extend(true, pagadata, data)
+    let data = await view.datas(cnf, ctx, router)
+    pagadata = Object.assign(pagadata, data)
     // tmpl
     // console.log("call viewer.render() name:", name)
     let body = ""

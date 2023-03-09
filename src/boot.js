@@ -7,7 +7,7 @@ const path = require('path')
 /**
  * cache
  */
-var cache_paths = null
+let cache_paths = null
 
 /**
  * 
@@ -17,7 +17,7 @@ function paths() {
     if(cache_paths){
         return cache_paths
     }
-    var boot = path.dirname(process.argv[1])
+    let boot = path.dirname(process.argv[1])
     cache_paths = {
         boot: boot,
         app: boot + "/app",

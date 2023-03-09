@@ -13,12 +13,12 @@ exports.run = function() {
         return
     }
 
-    var fork = require('child_process').fork;
-    var workers = [];
-    var appsPath = ['./app.js'];
+    let fork = require('child_process').fork;
+    let workers = [];
+    let appsPath = ['./app.js'];
 
-    var createWorker = function(appPath){
-        var worker = fork(appPath);
+    let createWorker = function(appPath){
+        let worker = fork(appPath);
         setTimeout(() => {
             worker.kill()
         }, config.watch_restart_timeout * 1000)
@@ -37,12 +37,12 @@ exports.run = function() {
         }  
     };
     // start workers
-    for (var i = appsPath.length - 1; i >= 0; i--) {
+    for (let i = appsPath.length - 1; i >= 0; i--) {
             createWorker(appsPath[i]);
     }
     // kill worker on parent exit
     process.on('exit',function(){
-            for(var pid in workers){
+            for(let pid in workers){
                 workers[pid].kill();
             }
     });

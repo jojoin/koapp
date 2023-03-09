@@ -5,16 +5,31 @@ const fs = require('fs')
 const path = require('path')
 const utilfs = require('./util/fs')
 
-const languageDataCache = {}
+var languageDataCache = {}
 
 function loadLanguage(langdir, type) {
-    if( languageDataCache[type] ) {
-        return languageDataCache[type] 
+    let cache_key = type+'_'
+    // console.log(languageDataCache)
+    // console.log('[[[[[[[[[[[[[[[[')
+    // for(let i in languageDataCache) {
+    //     console.log(i, languageDataCache[i].index.lang_show)
+    // }
+    // console.log(']]]]]]]]]]]]]]]]')
+    let cache = languageDataCache[cache_key]
+    if( cache ) {
+        // console.log('return languageDataCache', type, cache_key, cache.index.lang_show)
+        return  cache
     }
-    var langs = {}
+    
+    let langs = {}
     loadLanguageItem(langs, langdir + '/' + type)
-    // console.log(langs)
-    languageDataCache[type] = langs
+    // console.log('loadLanguage', langdir + '/' + type, type, cache_key, langs.index.lang_show)
+    languageDataCache[cache_key] = langs
+    // console.log('------------------')
+    // for(let i in languageDataCache) {
+    //     console.log(i, languageDataCache[i].index.lang_show)
+    // }
+    // console.log('------------------')
     return langs
 }
 
@@ -47,8 +62,8 @@ exports.load = async function(paths, cnf, app) {
     , hasEnUS = null
     , langdirs = {}
     // load
-    for(var i in types) {
-        var ty = path.basename(types[i])
+    for(let i in types) {
+        let ty = path.basename(types[i])
         if('en_US' == ty) {
             hasEnUS = 'en_US'
         }
@@ -97,6 +112,7 @@ exports.load = async function(paths, cnf, app) {
                 data: langdata,
             }
         }
+        // console.log(' ctx.loadLang(requselang)', requselang)
         ctx.lang = ctx.loadLang(requselang)
         // console.log(ctx.lang)
         // ok next

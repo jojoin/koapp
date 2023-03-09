@@ -14,7 +14,7 @@
     for(let i in list){
         let one = list[i]
         let row = []
-        for(var k in keys){
+        for(let k in keys){
             row.push(one[k])
         }
         table.rows.push(row)

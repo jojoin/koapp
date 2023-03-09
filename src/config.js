@@ -4,14 +4,14 @@
 const extend = require('extend')
 const boot = require('./boot')
 
-var config_cache = null
+let config_cache = null
 
 exports.config = function(){
     if(config_cache){
         return config_cache
     }
-    var paths =  boot.paths()
-    var config = {
+    let paths =  boot.paths()
+    let config = {
         http_port: 8000,
         watch_restart_timeout: 0, // 0 is not restart
         lang: 'en_US', // zh_CN

@@ -13,19 +13,19 @@ const fs = require('fs')
  {
      opts = opts || {};
  
-     var leg = nameAry.length
+     let leg = nameAry.length
          ,fileCon = []  //读取的单文件内容数组
          ,hasNum = 0; //已经读取的文件数量统计
      if(!leg){
          return callback(opts.merge?'':[]);
      }
      fileCon.length = leg; //保证与item的顺序相同
-     for(var i=0;i<leg;i++){
+     for(let i=0;i<leg;i++){
          read(i);
      }
      //读取文件
      function read(k){
-         var file = nameAry[k];
+         let file = nameAry[k];
          if(opts.path){ // 基路径
              file = path.join(opts.path, file);
          }
@@ -39,8 +39,8 @@ const fs = require('fs')
              if(hasNum==leg){ //已经读完
                  callback(null, opts.merge ? fileCon.join(opts.join||'') : fileCon);
                  /*if(true==opts.merge){
-                     var content = '';
-                     for(var j=0;j<leg;j++){ //合并文件
+                     let content = '';
+                     for(let j=0;j<leg;j++){ //合并文件
                          content += fileCon[j]
                      }
                      callback(err,content);
@@ -58,10 +58,10 @@ const fs = require('fs')
  exports.readsSync = function(fileAry, opts)
  {
      opts = opts || {};
-     var cons = [];
+     let cons = [];
      // 依次读取文件
-     for(var f in fileAry){
-         var file = fileAry[f];
+     for(let f in fileAry){
+         let file = fileAry[f];
          if(opts.path){ // 基路径
              file = path.join(opts.path, file);
          }
@@ -89,7 +89,7 @@ const fs = require('fs')
   * rec 是否递归获取文件
   */
  exports.scanSync = function(path, rec){
-     var fileList = [],
+     let fileList = [],
          folderList = [];
  
      walk(path, fileList, folderList);
@@ -97,7 +97,7 @@ const fs = require('fs')
      function walk(path, fileList, folderList){
          files = fs.readdirSync(path);
          files.forEach(function(item) {  
-             var tmpPath = path + '/' + item,
+             let tmpPath = path + '/' + item,
                  stats = fs.statSync(tmpPath);
  
              if (stats.isDirectory()) {  

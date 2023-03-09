@@ -11,7 +11,7 @@
  const router = new Router();
 
  exports.load = async function(paths, cnf, app) {
-    var appdir = paths.app
+    let appdir = paths.app
     , routesfile = appdir + "/routes.js"
     , controllerdir = appdir + "/controller"
     , routes = {
@@ -19,7 +19,7 @@
     }
     // config
     try {
-        var robj = require(routesfile)
+        let robj = require(routesfile)
         extend(routes,robj )
     } catch (e) {
         console.log(`[Note] cannot find routes file '${routesfile}'`)
