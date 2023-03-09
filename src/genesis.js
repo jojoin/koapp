@@ -274,6 +274,23 @@ function setCookie (cname, cvalue, path, exdays) {
     console.info(document.cookie);
 }
 
+
+function delurlquery(url, name) {
+    url = url.replace( new RegExp("\\\\?"+name+"=[^&]*", 'ig'), '?')
+        .replace(new RegExp("&"+name+"=[^&]*", 'ig'), '&')
+        .replace(/[\\?&]+$/ig, '')
+    return url
+}
+
+function addurlquery(url, k, v) {
+    var urls = delurlquery(url).split('#')
+    , spmk = urls[0].indexOf('?')==-1 ? '?' : '&'
+    urls[0] += spmk+k+'='+v
+    return urls.join('#')
+}
+
+
+
 /////////////////////////////////////////////////
 
 

@@ -87,14 +87,17 @@ exports.load = async function(paths, cnf, app) {
                 }   
             }
         }
-        // require lang
-        // console.log(requselang)
-        let langdata = loadLanguage(langdir, requselang)
-        // data
-        ctx.lang = {
-            use: requselang,
-            data: langdata,
-        } 
+        ctx.loadLang = function(lang_name) {
+            // require lang
+            // console.log('reloadLanguage', lang_name)
+            let langdata = loadLanguage(langdir, lang_name)
+            // data
+            return {
+                use: lang_name,
+                data: langdata,
+            }
+        }
+        ctx.lang = ctx.loadLang(requselang)
         // console.log(ctx.lang)
         // ok next
         await next();
