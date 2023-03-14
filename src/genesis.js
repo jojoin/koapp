@@ -283,7 +283,7 @@ function delurlquery(url, name) {
 }
 
 function addurlquery(url, k, v) {
-    var urls = delurlquery(url).split('#')
+    var urls = delurlquery(url, k).split('#')
     , spmk = urls[0].indexOf('?')==-1 ? '?' : '&'
     urls[0] += spmk+k+'='+v
     return urls.join('#')

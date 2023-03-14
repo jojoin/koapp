@@ -12,16 +12,16 @@ exports.json = function(url, querys) {
     return new Promise( (ok, err) => {
         // console.log(url + qsstr)
         http_obj.get(url + qsstr, (res) => {
-            var str = ''
+            let str = ''
             res.on('data', (part) => {
-                var sstr = part.toString()
+                let sstr = part.toString()
                 str += sstr
                 // console.log(sstr)
             })
             res.on('end', () =>  {
                 try{
                     // console.log(str)
-                    var data = JSON.parse(str)
+                    let data = JSON.parse(str)
                     // console.log(data)
                     ok(data)
                 }catch(e){

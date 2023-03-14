@@ -5,7 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const utilfs = require('./util/fs')
 
-var languageDataCache = {}
+const languageDataCache = {}
 
 function loadLanguage(langdir, type) {
     let cache_key = type+'_'
