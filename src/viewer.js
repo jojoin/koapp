@@ -112,6 +112,7 @@ async function compileOneView(paths, cnf, key, filename){
  * render one page
  */
  exports.render = async function(name, paths, cnf, ctx, router, next) {
+
     let view = allViews[name]
     if( ! view){
         throw `[Error] cannot find viewer <${name}> in 'app/viewer/*' path settings.`
@@ -134,7 +135,13 @@ async function compileOneView(paths, cnf, key, filename){
         lang: lang, // lang use & data
     }
     // console.log(lang)
-    let data = await view.datas(cnf, ctx, router)
+    let data = await view.datas(cnf, ctx, router)    
+    // console.log(ctx.res, ctx.status)
+    if(ctx.status>=301 && ctx.status<=302){
+        // redirect or other
+        ctx.body = `View <${name}> Status Code = ${ctx.status}`
+        return
+    }
     pagadata = Object.assign(pagadata, data)
     // tmpl
     // console.log("call viewer.render() name:", name)
@@ -143,6 +150,7 @@ async function compileOneView(paths, cnf, key, filename){
         body = view.tmplfunc(pagadata)
         // console.log(pagadata, body, view.tmplfunc)
     } catch (e) {
+        console.log(`Viewer <${name}> Tmpl Error:`, e)
         body = e.toString()
     }
     ctx.body = body
