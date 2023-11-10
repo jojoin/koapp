@@ -36,7 +36,7 @@
         let ctrl
         if(isView){
             ctrl = async function(ctx, next){
-                await viewer.render(ctrlpath, paths, cnf, ctx, router, next) // render page
+                await viewer.render(ctrlpath, paths, cnf, ctx, next) // render page
             }
         }else{
             let ctrlfunc = require(controllerdir + '/'+ctrlpath + '.js')

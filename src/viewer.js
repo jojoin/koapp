@@ -111,7 +111,7 @@ async function compileOneView(paths, cnf, key, filename){
 /**
  * render one page
  */
- exports.render = async function(name, paths, cnf, ctx, router, next) {
+ exports.render = async function(name, paths, cnf, ctx, next) {
 
     let view = allViews[name]
     if( ! view){
@@ -135,7 +135,7 @@ async function compileOneView(paths, cnf, key, filename){
         lang: lang, // lang use & data
     }
     // console.log(lang)
-    let data = await view.datas(cnf, ctx, router)    
+    let data = await view.datas(cnf, ctx)    
     // console.log(ctx.res, ctx.status)
     if(ctx.status>=301 && ctx.status<=302){
         // redirect or other
@@ -153,6 +153,7 @@ async function compileOneView(paths, cnf, key, filename){
         console.log(`Viewer <${name}> Tmpl Error:`, e)
         body = e.toString()
     }
+    // console.log(ctx.status)
     ctx.body = body
     //ok
  }

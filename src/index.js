@@ -4,6 +4,7 @@
 const boot = require('./boot')
 const server = require('./server')
 const genesis = require('./genesis')
+const viewer = require('./viewer')
 
 /**
 * config
@@ -25,6 +26,12 @@ const genesis = require('./genesis')
    return require(`${boot.paths().app}/model/${name}`)
 }
 
+/**
+* view 
+*/
+exports.viewer_render = async function (pname, cnf, ctx, next) {
+   await viewer.render(pname, boot.paths(), cnf, ctx, next) // render page
+}
 
 /**
 * genesis_init
