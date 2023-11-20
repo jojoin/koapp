@@ -100,11 +100,33 @@ async function compileOneView(paths, cnf, key, filename){
         return
     }
     // scan
-    let files = utilfs.scanSync(viewerdir).files
-    for(let i in files){
-        let one = files[i]
-        let key = path.basename(one).replace('.js', '')
-        allViews[key] = await compileOneView(paths, cnf, key, one)
+    var doscviews = async function(bsp, sco) {
+        if(bsp && bsp.indexOf('_')===0){
+            return
+        }
+        for(let i in sco.files){
+            let one = sco.files[i]
+            let key = path.basename(one).replace('.js', '')
+            if(key.indexOf('_')===0){
+                continue
+            }
+            if(bsp){
+                key = bsp + '_' + key
+            }
+            // console.log(key)
+            allViews[key] = await compileOneView(paths, cnf, key, one)
+        }
+    }
+    
+    // do scan view
+    let sco = utilfs.scanSync(viewerdir)
+    await doscviews(null, sco)
+    // screen child dir
+    for(let i in sco.folders){
+        let dir = sco.folders[i]
+        , bsp = path.basename(dir);
+        let sco2 = utilfs.scanSync(dir)
+        await doscviews(bsp, sco2)
     }
  }
 
@@ -113,7 +135,8 @@ async function compileOneView(paths, cnf, key, filename){
  */
  exports.render = async function(name, paths, cnf, ctx, next) {
 
-    let view = allViews[name]
+    var key = name.replace('/', '_')
+    let view = allViews[key]
     if( ! view){
         throw `[Error] cannot find viewer <${name}> in 'app/viewer/*' path settings.`
     }
@@ -121,7 +144,7 @@ async function compileOneView(paths, cnf, key, filename){
     if(cnf.debug) {
         // refresh
         let fname = `${paths.app}/viewer/${name}.js`
-        view = await compileOneView(paths, cnf, name, fname)
+        view = await compileOneView(paths, cnf, key, fname)
     }
     // data
     let lang = ctx.lang.data
@@ -130,6 +153,7 @@ async function compileOneView(paths, cnf, key, filename){
         title: "koappx page",
         page: {
             name: name,
+            key: key,
             version: cnf.page_version||0,
         },
         lang: lang, // lang use & data
