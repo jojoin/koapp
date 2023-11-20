@@ -7,18 +7,18 @@ const utilfs = require('./util/fs')
 
 const languageDataCache = {}
 
-function loadLanguage(langdir, type) {
+function loadLanguage(cnf, langdir, type) {
     let cache_key = type+'_'
-    // console.log(languageDataCache)
+    // console.log(cnf)
     // console.log('[[[[[[[[[[[[[[[[')
     // for(let i in languageDataCache) {
     //     console.log(i, languageDataCache[i].index.lang_show)
     // }
     // console.log(']]]]]]]]]]]]]]]]')
     let cache = languageDataCache[cache_key]
-    if( cache ) {
+    if( cache && false==cnf.debug ) {
         // console.log('return languageDataCache', type, cache_key, cache.index.lang_show)
-        return  cache
+        return cache
     }
     
     let langs = {}
@@ -36,9 +36,11 @@ function loadLanguage(langdir, type) {
 function loadLanguageItem(langs, dir) {
     const flist = utilfs.scanSync(dir)
     for(let i in flist.files){
-        let one = flist.files[i]
+        let one = flist.files[i];
+        // delete cache
+        delete require.cache[require.resolve(one)];
+        let lobj = require(one)
         , key = path.basename(one).replace('.js', '')
-        , lobj = require(one)
         // console.log('files', i, key, one, lobj)
         langs[key] = lobj
     }
@@ -105,7 +107,7 @@ exports.load = async function(paths, cnf, app) {
         ctx.loadLang = function(lang_name) {
             // require lang
             // console.log('reloadLanguage', lang_name)
-            let langdata = loadLanguage(langdir, lang_name)
+            let langdata = loadLanguage(cnf, langdir, lang_name)
             // data
             return {
                 use: lang_name,
