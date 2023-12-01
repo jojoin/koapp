@@ -150,6 +150,7 @@ async function compileOneView(paths, cnf, key, filename){
     let lang = ctx.lang.data
     lang.useset = ctx.lang.use
     let pagadata = {
+        config: cnf,
         title: "koappx page",
         page: {
             name: name,
