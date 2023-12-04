@@ -30,6 +30,8 @@ exports.json = function(url, querys) {
                     err("res str is not json: "+str)
                 }
             })
-        })
+        }).on('error', (e) => {
+            err(e)
+        });
     })
 }
