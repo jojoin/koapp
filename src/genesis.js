@@ -168,6 +168,10 @@ function $id(id){
 }
 
 function $class(elm, name){
+    if(!name){
+        name = elm
+        elm = document
+    }
     return elm.getElementsByClassName(name)
 }
 

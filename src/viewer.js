@@ -158,6 +158,7 @@ async function compileOneView(paths, cnf, key, filename){
             version: cnf.page_version||0,
         },
         lang: lang, // lang use & data
+        ctx: ctx,
     }
     // console.log(lang)
     let data = await view.datas(cnf, ctx)    
