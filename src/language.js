@@ -79,9 +79,8 @@ exports.load = async function(paths, cnf, app) {
     }
     // use 
     realuselang = realuselang || hasEnUS || firstlang
-    // select
+    // select lang
     app.use(async (ctx, next) => {
-
         let q = ctx.request.query
         , cklang = ctx.cookies.get("lang")
         , requselang = realuselang+""
@@ -119,5 +118,19 @@ exports.load = async function(paths, cnf, app) {
         // console.log(ctx.lang)
         // ok next
         await next();
-      });
+    });
+
+    // select theme
+    app.use(async (ctx, next) => {
+        let q = ctx.request.query
+        , ths = ctx.cookies.get("theme");
+        if(ths) {
+            ctx.theme = ths;
+        }
+        if(q.theme){
+            ctx.theme = q.theme;
+            ctx.cookies.set("theme", q.theme, {path:"/", maxAge:1000*60*60*24,/**365, httpOnly: true*/})
+        }
+        await next();
+    });
 }

@@ -167,6 +167,10 @@ function $id(id){
     return document.getElementById(id)
 }
 
+function $clas(a, n){
+    return $class(a, n)[0]
+}
+
 function $class(elm, name){
     if(!name){
         name = elm
