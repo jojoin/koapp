@@ -86,7 +86,7 @@ exports.load = async function(paths, cnf, app) {
         , requselang = realuselang+""
         if( q.lang ) {
             if(langdirs[q.lang]) {
-                ctx.cookies.set("lang", q.lang, {path:"/", maxAge:1000*60*60*24,/**365, httpOnly: true*/})
+                ctx.cookies.set("lang", q.lang, {path:"/", maxAge:1000*60*60*24*30, httpOnly: false})
                 requselang = q.lang // change use
             }else{
                 if(cnf.debug){
@@ -129,7 +129,7 @@ exports.load = async function(paths, cnf, app) {
         }
         if(q.theme){
             ctx.theme = q.theme;
-            ctx.cookies.set("theme", q.theme, {path:"/", maxAge:1000*60*60*24,/**365, httpOnly: true*/})
+            ctx.cookies.set("theme", q.theme, {path:"/", maxAge:1000*60*60*24*365, httpOnly: false})
         }
         await next();
     });
