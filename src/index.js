@@ -6,42 +6,42 @@ const server = require('./server')
 const genesis = require('./genesis')
 const viewer = require('./viewer')
 
-/**
+/*
 * config
 */
  exports.config = require('./config').config
  exports.paths = boot.paths
 
-/**
+/*
 * util
 */
  exports.util = function (name) {
-   return require(`./util/${name}`)
+   return require(`${boot.paths().app}/util/${name}`)
 }
 
-/**
+/*
 * model
 */
  exports.model = function (name) {
    return require(`${boot.paths().app}/model/${name}`)
 }
 
-/**
+/*
 * view 
 */
 exports.viewer_render = async function (pname, cnf, ctx, next) {
    await viewer.render(pname, boot.paths(), cnf, ctx, next) // render page
 }
 
-/**
+/*
 * genesis_init
 */
- exports.genesis_init = function() {
-    genesis.create()
- }
+exports.genesis_init = function() {
+   genesis.create()
+}
 
 
-/**
+/*
 * run
 */
 exports.run = async function (argument)

@@ -1,7 +1,12 @@
+const NodeCache = require( "node-cache" );
+const ctxCache = new NodeCache();
+
 
 exports.load = async function(app) {
 
     app.use(async (ctx, next) => {
+
+        // api
         ctx.apiData = function(data){
             data = data || {}
             data.ret = 0
@@ -13,6 +18,10 @@ exports.load = async function(app) {
                 err: errstr || "Error"
             }
         }
+
+        // cache 
+        ctx.cache = ctxCache;
+
         await next()
     })
 
