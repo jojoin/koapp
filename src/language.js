@@ -1,6 +1,6 @@
-/**
- * language
- */
+/*
+* language
+*/
 const fs = require('fs')
 const path = require('path')
 const utilfs = require('./util/fs')
@@ -48,9 +48,9 @@ function loadLanguageItem(langs, dir) {
 }
 
 
-/**
- * load language
- */
+/*
+* load language
+*/
 exports.load = async function(paths, cnf, app) {
     let langdir = paths.language
     if( ! fs.statSync(langdir, {throwIfNoEntry: false})) {

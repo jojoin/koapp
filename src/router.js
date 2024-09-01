@@ -1,16 +1,16 @@
-/**
- * route
- */
- const fs = require('fs')
- const extend = require('extend')
+/*
+* route
+*/
+const fs = require('fs')
+const extend = require('extend')
 
- const viewer = require('./viewer')
- const utilfs = require('./util/fs')
+const viewer = require('./viewer')
+const utilfs = require('./util/fs')
 
- const Router = require('koa-router') // koa-router
- const router = new Router();
+const Router = require('koa-router') // koa-router
+const router = new Router();
 
- exports.load = async function(paths, cnf, app) {
+exports.load = async function(paths, cnf, app) {
     let appdir = paths.app
     , routesfile = appdir + "/routes.js"
     , controllerdir = appdir + "/controller"
@@ -50,6 +50,7 @@
             router.get(name, ctrl)
         }
     }
+    
     for(let i in routes){
         let isPost = false
         let isView = false
@@ -68,7 +69,10 @@
         }
         doOneRoute(i, ctrlpath, isPost, isView)
     }
+
     // use routes
     app.use(router.routes());
+
     // app.use(router.allowedMethods());
- }
+
+}
