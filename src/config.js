@@ -1,6 +1,6 @@
-/**
- * config
- */
+/*
+* config
+*/
 const extend = require('extend')
 const boot = require('./boot')
 

@@ -9,44 +9,49 @@ const viewer = require('./viewer')
 /*
 * config
 */
- exports.config = require('./config').config
- exports.paths = boot.paths
+exports.config = require('./config').config
+exports.paths = boot.paths
+
+/*
+* app
+*/
+exports.app = require(`./app.js`).app
 
 /*
 * util
 */
- exports.util = function (name) {
-   return require(`${boot.paths().app}/util/${name}`)
+exports.util = function (name) {
+    return require(`${boot.paths().app}/util/${name}`)
 }
 
 /*
 * model
 */
- exports.model = function (name) {
-   return require(`${boot.paths().app}/model/${name}`)
+exports.model = function (name) {
+    return require(`${boot.paths().app}/model/${name}`)
 }
 
 /*
 * view 
 */
 exports.viewer_render = async function (pname, cnf, ctx, next) {
-   await viewer.render(pname, boot.paths(), cnf, ctx, next) // render page
+    await viewer.render(pname, boot.paths(), cnf, ctx, next) // render page
 }
 
 /*
 * genesis_init
 */
-exports.genesis_init = function() {
-   genesis.create()
+exports.genesis_init = function () {
+    genesis.create()
 }
 
 
 /*
 * run
+* return koa app
 */
-exports.run = async function (argument)
-{
-    
+exports.run = async function (argument) {
+
     // console.log(' process.cwd(): ', process.cwd()) // 执行命令时所在的目录
     // console.log(' process.argv: ', path.dirname(process.argv[1])) // 命令行参数
     // console.log(' __dirname: ', __dirname)   // 该index.js所在的目录
@@ -55,6 +60,5 @@ exports.run = async function (argument)
     // console.log("start koapp!")
 
     // start
-    server.run()
-
+    return server.run()
 }

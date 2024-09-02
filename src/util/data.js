@@ -1,7 +1,7 @@
-/**
- * 对象列表转成table
- */
- exports.listToTable = function(list) {
+/*
+* 对象列表转成table
+*/
+exports.listToTable = function(list) {
     let table = {keys:[], rows:[]}
     if(list.length == 0){
         return table
@@ -22,10 +22,10 @@
     return table
 }
 
-/**
- * table转成对象列表
- */
- exports.tableToList = function(table) {
+/*
+* table转成对象列表
+*/
+exports.tableToList = function(table) {
      if(!table || !table.keys || table.keys.length == 0){
          return [] // 空表
      }

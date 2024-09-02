@@ -1,11 +1,11 @@
-/**
- * server
- */
+/*
+* server
+*/
  const config = require('./config').config()
 
-/**
- * 
- */
+/*
+* 
+*/
 exports.run = function() {
 
     if(config.watch_restart_timeout <= 0) {
@@ -42,9 +42,9 @@ exports.run = function() {
     }
     // kill worker on parent exit
     process.on('exit',function(){
-            for(let pid in workers){
-                workers[pid].kill();
-            }
+        for(let pid in workers){
+            workers[pid].kill();
+        }
     });
 
 

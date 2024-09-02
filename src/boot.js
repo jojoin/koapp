@@ -1,18 +1,18 @@
-/**
- * boot
- */
+/*
+* boot
+*/
 const path = require('path')
 
 
-/**
- * cache
- */
+/*
+* cache
+*/
 let cache_paths = null
 
-/**
- * 
- * @returns 
- */
+/*
+* 
+* @returns 
+*/
 function paths() {
     if(cache_paths){
         return cache_paths

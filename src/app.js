@@ -1,12 +1,12 @@
-/**
- * app
+/*
+* app
 */
 const Koa = require('koa');
 const app = new Koa();
 
 const util = require('./util')
 
- // modules
+// modules
 const config = require('./config').config()
 const paths = require('./boot').paths()
 const ctxres = require('./ctxres')
@@ -16,9 +16,10 @@ const router = require('./router')
 const static = require('./static')
 
 
-/**
- * run
- */
+
+/*
+* run
+*/
 async function start(){
     await ctxres.load(app)
     await language.load(paths, config, app)
@@ -29,16 +30,22 @@ async function start(){
 start().then()
 
 
-/**
- * listen
- */
- app.listen(config.http_port, function(){
+/*
+* listen
+*/
+app.listen(config.http_port, function(){
     // let tt = config.watch_restart_timeout
     console.log(`app listening on port ${config.http_port}!`)
 });
 
 // exit event
 process.on('exit', function(){
+
 })
 
+
+// app
+exports.app = function() {
+    return app
+}
 
