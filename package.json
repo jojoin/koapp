@@ -20,15 +20,15 @@
     "mvc"
   ],
   "dependencies": {
-    "csso": "^5.0.2",
-    "extend": "^3.0.2",
-    "html-minifier": "^4.0.0",
-    "koa": "^2.13.1",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
-    "less": "^4.1.2",
-    "node-cache": "^5.1.2",
-    "uglify-js": "^3.14.5"
+    "csso": "5.0.2",
+    "extend": "3.0.2",
+    "html-minifier": "4.0.0",
+    "koa": "2.13.1",
+    "koa-router": "7.4.0",
+    "koa-static": "5.0.0",
+    "less": "4.1.2",
+    "node-cache": "5.1.2",
+    "uglify-js": "3.17.4"
   },
   "author": "yangjie",
   "license": "MIT",
