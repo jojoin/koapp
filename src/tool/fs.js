@@ -1,5 +1,5 @@
 /*
-* util fs
+* tool fs
 */
 const fs = require('fs')
 

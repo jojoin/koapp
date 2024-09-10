@@ -18,6 +18,13 @@ exports.paths = boot.paths
 exports.app = require(`./app.js`).app
 
 /*
+* tool
+*/
+exports.tool = function (name) {
+    return require(`./tool/${name}`)
+}
+
+/*
 * util
 */
 exports.util = function (name) {

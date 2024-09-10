@@ -3,7 +3,7 @@
 */
 const fs = require('fs')
 const path = require('path')
-const utilfs = require('./util/fs')
+const toolfs = require('./tool/fs')
 
 const languageDataCache = {}
 
@@ -34,7 +34,7 @@ function loadLanguage(cnf, langdir, type) {
 }
 
 function loadLanguageItem(langs, dir) {
-    const flist = utilfs.scanSync(dir)
+    const flist = toolfs.scanSync(dir)
     for(let i in flist.files){
         let one = flist.files[i];
         // delete cache
@@ -58,7 +58,7 @@ exports.load = async function(paths, cnf, app) {
         return
     }
     // start
-    let types =  utilfs.scanSync(langdir).folders
+    let types =  toolfs.scanSync(langdir).folders
     , realuselang = null
     , firstlang = null
     , hasEnUS = null

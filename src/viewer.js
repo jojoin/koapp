@@ -23,9 +23,9 @@ const htmlMinifyOptions = {
 
  const extend = require('extend')
 
- const utilfs = require('./util/fs')
- const utiltppl = require('./util/tppl')
- const utiltype = require('./util/type')
+ const toolfs = require('./tool/fs')
+ const tooltppl = require('./tool/tppl')
+ const tooltype = require('./tool/type')
 
  // data
 const allViews = {}
@@ -39,7 +39,7 @@ async function readComponentFiles(componentdir, names, ext){
         return `${componentdir}/${x}/${filename}.${ext}`
     })
     // console.log(files)
-    return utilfs.readsSync(files, {ignore: true, merge: true})
+    return toolfs.readsSync(files, {ignore: true, merge: true})
 }
 
 
@@ -71,11 +71,11 @@ async function compileJsCssTpl(cnf, staticdir, componentdir, vname, view){
 
 async function compileOneView(paths, cnf, key, filename){
     let view = require(filename)
-    if( ! utiltype.isArray(view.components) ){
+    if( ! tooltype.isArray(view.components) ){
         console.log(`[Error] cannot find components setting in viewer '${key}'.`)
         return
     }
-    if( ! utiltype.isFunction(view.datas) ){
+    if( ! tooltype.isFunction(view.datas) ){
         console.log(`[Error] cannot find datas setting in viewer '${key}'.`)
         return
     }
@@ -86,7 +86,7 @@ async function compileOneView(paths, cnf, key, filename){
     // load
     return {
         "datas": view.datas,
-        "tmplfunc": utiltppl(viewcon),
+        "tmplfunc": tooltppl(viewcon),
     }
 }
 
@@ -119,13 +119,13 @@ exports.load = async function(paths, cnf, app) {
     }
     
     // do scan view
-    let sco = utilfs.scanSync(viewerdir)
+    let sco = toolfs.scanSync(viewerdir)
     await doscviews(null, sco)
     // screen child dir
     for(let i in sco.folders){
         let dir = sco.folders[i]
         , bsp = path.basename(dir);
-        let sco2 = utilfs.scanSync(dir)
+        let sco2 = toolfs.scanSync(dir)
         await doscviews(bsp, sco2)
     }
  }

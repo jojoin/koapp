@@ -5,7 +5,7 @@ const fs = require('fs')
 const extend = require('extend')
 
 const viewer = require('./viewer')
-const utilfs = require('./util/fs')
+const toolfs = require('./tool/fs')
 
 const Router = require('koa-router') // koa-router
 const router = new Router();
