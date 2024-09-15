@@ -34,7 +34,6 @@ start().then()
 * listen
 */
 app.listen(config.http_port, function(){
-    // let tt = config.watch_restart_timeout
     console.log(`app listening on port ${config.http_port}!`)
 });
 

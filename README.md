@@ -1,2 +1,2 @@
-# koapp
-simplify / fast web application framework
+# Koappx
+Simplify / fast web application framework

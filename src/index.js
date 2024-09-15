@@ -15,7 +15,9 @@ exports.paths = boot.paths
 /*
 * app
 */
-exports.app = require(`./app.js`).app
+exports.app = function() {
+    return require(`./app.js`).app
+}
 
 /*
 * tool
