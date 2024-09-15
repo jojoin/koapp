@@ -11,7 +11,7 @@ const config = require('./config').config()
 */
 exports.run = function(initfunc, afterfunc) {
 
-    // console.log("cluster.isMaster: ", cluster.isMaster)
+    // console.log("cluster.isMaster: ", cluster.isMaster, initfunc, afterfunc)
     
     let rsti = config.watch_restart_timeout;
     let do_run = function() {

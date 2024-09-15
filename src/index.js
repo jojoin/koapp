@@ -59,7 +59,7 @@ exports.genesis_init = function () {
 * run
 * return koa app
 */
-exports.run = async function (argument) {
+exports.run = async function (a,b,c,d,e,f,g) {
 
     // console.log(' process.cwd(): ', process.cwd()) // 执行命令时所在的目录
     // console.log(' process.argv: ', path.dirname(process.argv[1])) // 命令行参数
@@ -69,5 +69,5 @@ exports.run = async function (argument) {
     // console.log("start koapp!")
 
     // start
-    return server.run()
+    return server.run(a,b,c,d,e,f,g)
 }
