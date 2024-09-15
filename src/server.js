@@ -9,14 +9,15 @@ const config = require('./config').config()
 /*
 * 
 */
-exports.run = function(initfunc) {
+exports.run = function(initfunc, afterfunc) {
 
     // console.log("cluster.isMaster: ", cluster.isMaster)
     
     let rsti = config.watch_restart_timeout;
     let do_run = function() {
-        require("./app.js")
         initfunc && initfunc();
+        require("./app.js");
+        afterfunc && afterfunc();
     }
 
     if(rsti <= 0) {
